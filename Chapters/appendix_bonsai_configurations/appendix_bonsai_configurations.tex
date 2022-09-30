@@ -1,0 +1,60 @@
+%!TEX root = ../../thesis.tex
+
+\graphicspath{{Chapters/appendix\_bonsai\_configurations/figures/}}
+\chapter{BonsaiNet Configurations} \label{chapter:bonsai_configs}
+\section{CIFAR-10 Small Cell} \label{sect:small_cell}
+\begin{itemize}   \setlength\itemsep{-.2em}
+	\item \textbf{GPU Space}: 10.5, the maximum VRAM space of an NVidia 1080Ti
+	\item \textbf{Scale}: 36, taken from DARTS
+	\item \textbf{Nodes}: 4
+	\item \textbf{Depth}: 4
+	\item \textbf{Sections}: [[\texttt{N}, \texttt{N}], [\texttt{R}], [\texttt{N}, \texttt{N}], [\texttt{R}], [\texttt{N}, \texttt{N}]], taken from DARTS
+	\item \textbf{Operations}: Same as DARTS: Identity, 3x3 Max Pool, 3x3 Average Pool, 3x3 Separable Convolution, 5x5 Separable Convolution,
+	3x3 Dilated Convolution, 5x5 Dilated Convolution
+\end{itemize}
+
+\section{CIFAR-10 Large Cell} \label{sect:large_cell}
+\begin{itemize}   \setlength\itemsep{-.2em}
+	\item \textbf{GPU Space}: 10.5, the maximum VRAM space of an NVidia 1080Ti
+	\item \textbf{Scale}: 64
+	\item \textbf{Nodes}: [8, 12, 12]
+	\item \textbf{Depth}: [4, 4, 4]
+	\item \textbf{Sections}: [[\texttt{N}], [\texttt{R}], [\texttt{R}]]
+	\item \textbf{Operations}: Same as DARTS: Identity, 3x3 Max Pool, 3x3 Average Pool, 3x3 Separable Convolution, 5x5 Separable Convolution,
+	3x3 Dilated Convolution, 5x5 Dilated Convolution
+\end{itemize}
+
+\section{CIFAR-10 Type-2 Large Cell} \label{sect:type2_large_cell}
+\begin{itemize}   \setlength\itemsep{-.2em}
+	\item \textbf{GPU Space}: 10.5, the maximum VRAM space of an NVidia 1080Ti
+	\item \textbf{Scale}: 64
+	\item \textbf{Nodes}: 7
+	\item \textbf{Depth}: 3
+	\item \textbf{Sections}: [[\texttt{N}], [\texttt{R}], [\texttt{R}]]
+	\item \textbf{Operations}: Same as DARTS: Identity, 3x3 Max Pool, 3x3 Average Pool, 3x3 Separable Convolution, 5x5 Separable Convolution,
+	3x3 Dilated Convolution, 5x5 Dilated Convolution
+\end{itemize}
+
+\section{CIFAR-10 3090 Large Cell} \label{sect:3090_large_cell}
+\begin{itemize}   \setlength\itemsep{-.2em}
+	\item \textbf{GPU Space}: 20, the maximum VRAM space of an NVidia 3090
+	\item \textbf{Scale}: 96
+	\item \textbf{Nodes}: 7
+	\item \textbf{Depth}: 3
+	\item \textbf{Sections}: [[\texttt{N}], [\texttt{R}], [\texttt{R}]]
+	\item \textbf{Operations}: Same as DARTS: Identity, 3x3 Max Pool, 3x3 Average Pool, 3x3 Separable Convolution, 5x5 Separable Convolution,
+	3x3 Dilated Convolution, 5x5 Dilated Convolution
+\end{itemize}
+
+\section{ImageNet 3090 Large Cell} \label{sect:imagenet_large_cell}
+\begin{itemize}   \setlength\itemsep{-.2em}
+	\item \textbf{GPU Space}: 20, the maximum VRAM space of an NVidia 3090
+	\item \textbf{Scale}: 48
+	\item \textbf{Batch Size}: 128
+	\item \textbf{Nodes}: 7
+	\item \textbf{Depth}: 4
+	\item \textbf{Sections}: [[\texttt{N}], [\texttt{R}], [\texttt{R}]]
+	\item \textbf{Operations}: Same as DARTS: Identity, 3x3 Max Pool, 3x3 Average Pool, 3x3 Separable Convolution, 5x5 Separable Convolution,
+	3x3 Dilated Convolution, 5x5 Dilated Convolution
+\end{itemize}
+

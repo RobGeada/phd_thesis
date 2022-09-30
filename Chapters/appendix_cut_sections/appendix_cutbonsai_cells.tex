@@ -1,0 +1,222 @@
+%!TEX root = ../../thesis.tex
+
+\graphicspath{{Chapters/appendix_bonsai/figures/}}
+
+\subsection{Small Cell}~\ref{sect:small_cell_introduction}
+The first configuration is designed to mirror DARTS as closely as
+possible within the BonsaiNet search space and are trained on an NVidia 1080TI GPU just as DARTS was. While the internal
+operational configuration of DARTS cannot be exactly mirrored
+by BonsaiNet due the usage of summation instead of concatenation in the output node (refer to Section~\ref{sect:bonsai_search_space} for
+the rationale behind this decision), the node count and depth is chosen
+to ensure the general connectivity and parameter count is roughly similar. The unique characteristic of the small
+cell configuration is the titular small cells, which individually make up a small proportion (<1/8th) of the
+total model size. Other than
+Xie \etal's randomly-wired models from Section~\ref{sect:random_search}, the majority of all cellular CIFAR-10 models
+in literature belong to this small-cell classification.
+
+For BonsaiNet, small-cell models have 8 cells each with 4 nodes, with reduction cells placed at 1/3 and 2/3 depth of
+the model. This is identical to DARTS\cite{liu2018},
+at least in terms of cellular configuration. The way that these cells are allocated into model sections vary, with some building
+each cell as a separate section, and others building models as two section of 3 cells and one section of 2. The most
+common small cell configuration is fully detailed in Appendix~\ref{chapter:bonsai_configs}, section~\ref{sect:small_cell})
+
+\begin{table}[h]
+\begin{center}
+	\begin{tabular}{r|c|c|c|c}
+	 & Test Accuracy & Parameters (M) & Search Hours & Total Runtime (Hours)\\
+	\hline
+	Min    & 96.05 & 2.50 & 10.6  & 80.93\\
+	Median & 96.65 & 3.65 & 11.50 & 92.95\\
+	Max    & 96.83 & 5.00 & 42.28 & 149.48\\
+	\end{tabular}
+\end{center}
+\caption{Various metric performances of the 9 small cell CIFAR-10 BonsaiNet models that trained to the full 600 epochs.
+Search hours refers to the time required to grow the model to full size, while total runtime is this search time plus
+the time to train the model fully.}
+\label{tab:small_cell_metrics}
+\end{table}
+27 such small cell BonsaiNet models have gone through the Bonsai process according to roughly similar hyperparameter choices,
+with 9 of those fully trained for the full 600 epochs. The 18 that did not reach full 600 epoch training were either
+from experiments that did not full training(such as 64 epoch testing runs or benchmarking tests of the actual Bonsai process itself)
+or were debugging runs,wherein the models were terminated after the desired bug was identified.
+
+The performance of those 9 are shown in Table~\ref{tab:small_cell_metrics}. Among these 9
+small-cell models are the ones described in ``Bonsai-Net: One-Shot Neural Architecture Search via
+Differentiable Pruners''~\cite{geada2020}, published
+in CVPR-NAS 2020. In this paper, I demonstrated the consistency of BonsaiNet by training four such small cell
+models under identical conditions, and recovered a mean accuracy of $96.65\pm0.06\%$, mean parameter count of
+$2.95\pm0.11$M, and mean memory allocation of 7.21$\pm$.14 GiB.
+Two of the four runs were performed on the 1080Ti, and these two runs reported a search time of 10.6
+and 18.2 hours. The other two runs were performed on a cloud GPU and the search times were unfortunately not recorded, but
+due to hardware differences would not make for a particularly useful comparison anyway.
+
+In general, the small-cell configuration produces decently performing models in a relatively quick time, with their main
+advantage coming from their highly efficient parameter count. For a full comparison against the literature, see
+Table~\ref{tab:bonsai_comp_performance}. However, I was not particularly satisfied with either
+their search time or final performance, and wanted to see how much further these could be pushed. This thus motivated
+the design of the large cell experiments.
+
+\subsection{Large Cell}
+While the small-cell pattern is ubiquitous in NAS literature, the need to specify the exact cellular structure in terms
+of normal and reduction cells always felt like a significant limitation of the search space. It also introduces a massive
+amount of human design into the search process; the need to specify which cells are which and how many of each is an
+architectural decision. If the point of neural architecture search is to eliminate the need to spend time and money
+manually tweaking model design, requiring that the user manually specify cellular configuration is simply shifting
+the design burden elsewhere.
+
+To eliminate this need, we can use a large-cell design where the repeating cell patterns are replaced by a single large
+cell. Specifically,  any repeating number of normal cells can be replaced by a larger normal cell, and a reduction cell
+followed by any number of normal cells can be replaced by a larger reduction cell. This latter case is true because
+reduction cells only differ from subsequent normal cells in the edges that directly connect to the cell inputs, while all
+of the other edges in a reduction cell perform identical operations as an identically-dimensioned normal cell would.
+This reduces the possible variability of the model, as the only real variable now is the total number of reductions. This
+is usually relatively constant for any particular dataset, usually two for CIFAR and ImageNet\cite{liu2018}\cite{xi2019}\cite{xu2020}\cite{pham2018}.
+Following the cell combination rules outlined above, we can transform the small cell pattern into a large cell pattern:
+
+\begin{center}
+\begin{tabular}{rccc}
+	\text{Small Cell:} & NN & RNN & RNN \\
+	\text{Large Cell:} & N  & R   & R
+\end{tabular}
+\end{center}
+
+To ensure that we have a similar number of operations in our large-cell models, we can use an analogue of Equation~\ref{eq: cell_edges}
+to determine the node count:
+
+\begin{align}
+	\sum_{i=0}^{n'+1} \min(n'-i+1, d') \ge C \sum_{i=0}^{n+1} \min(n-i+1, d) \cite{eq:cell_node_count}
+\end{align}
+
+Since $C=2$, $n=4$, and $d=4$ for the cell group in the small-cell configuration while $C=3$, $n=4$, and $d=4$ for
+the next two, Equation~\ref{eq:cell_node_count} states that we want to get close to 28 edges in the first large cell and 42 in the next two.
+Choosing $n'$ and $d'$ as $Cn$ and $n$ respectively approximates these values well, while ensuring that the linearity
+of the large-cell model is relatively the same as that of the small-cell. This results in a 3 cell model, with the first
+cell having 8 nodes and a depth of 4, while the remaining cells have 12 nodes and a depth of 4. The advantage of these
+models is they have 7 fewer patterns compared to the small cell models, which means there are simply less cycles of growing
+and pruning necessary before the model reaches its full size. This reduces the total search time of these models drastically,
+typically on the order of two and a half hours total. Table~\ref{tab:large_cell_metrics} shows the results of all 3 of the
+models of this specific configuration that were trained, and the configuration is given in Appendix~\ref{sect:large_cell}.
+
+\begin{table}[h]
+\begin{center}
+	\begin{tabular}{r|c|c|c|c}
+	 & Test Accuracy & Parameters (M) & Search Hours & Total Runtime (Hours) \\
+	\hline
+	0	    & 96.69 & 2.64 	& 2.53 	& 68.53\\
+	1 		& 96.46 & 2.22 	& 2.38 	& 88.06\\
+	2		& 96.72	& 3.18	& 1.72	& 82.31\\
+	\end{tabular}
+\end{center}
+\caption{Various metric performances of the 3 large cell CIFAR-10 BonsaiNet models that trained to the full 600 epochs.}
+\label{tab:large_cell_metrics}
+\end{table}
+
+The accuracy of these models is roughly similar to the small-cell models, just slightly worse on average. However,
+these models are significantly faster to search for, taking on the order of two hours, and tend to have around one million
+parameters fewer than the median small cell model. Since these large-cell models are essentially supersets of the small-cell
+models, they can form small-cell analogues if they desire, but have the freedom to explore connectivity patterns that
+smaller cells simply do not have the nodes to allow for. The large-cell model's relatively comparable performance at
+higher parameter efficiency perhaps suggests the restrictiveness of the small-cell configuration is artificially lowering the efficiency
+of such small-cell models.
+
+\subsection{Type-2 Large Cell}
+While the initial round of large cell models perform excellently in terms of performance-per-parameter efficiency and search time,
+their accuracy is ultimately still lacking compared to other NAS approaches. The DARTS-based configuration that
+constructed the small-cell and initial large-cell models seems to focus heavily on parameter efficiency which is a worthwhile
+target in its own right, but I wanted to additionally explore configurations that maximized classification performance while
+still fitting on a 1080Ti. To do this, I wanted to create cells that were larger not just in node count, but also in scale;
+that is, the number of channels per operation within the model. This has been shown in various papers such as ResNet\cite{szegedy2014}
+to be an effective means of increasing performance, and thus I experimented with configurations that increased the scale of the models
+from 36 to 64. To compensate for the increased model size that the increased channel size brings, the cell node counts were
+reduced down to 7 each, and the depth set to 3. Otherwise, the configuration was identical to that of the initial large
+cells. This configuration is dubbed the Type-2 Large Cell as described in Appendix~\ref{sect:type2_large_cell},
+and the performances of the 3 models of this configuration are shown in Table~\ref{tab:large_cell_metrics}.
+
+\begin{table}[h]
+\begin{center}
+	\begin{tabular}{r|c|c|c|c}
+	 & Test Accuracy & Parameters (M) & Search Hours & Total Runtime (Hours) \\
+	\hline
+	0    & 96.82 & 5.62 & 1.43 & 102.63 \\
+	1	 & 96.96 & 5.81 & 1.66 & 87.09\\
+	2    & 97.04 & 7.39 & 2.54 & 81.91\\
+	\end{tabular}
+\end{center}
+\caption{Various metric performances of the 3 type-2 large cell CIFAR-10 BonsaiNet models that trained to the full 600 epochs.}
+\label{tab:large_cell_metrics}
+\end{table}
+
+Here, we see that accuracy has markedly increased compared to the small-cell and type-1 large cells, with the \textit{minimum}
+type-2 accuracy outpacing the \textit{median} accuracy of the other configurations. This accuracy increase comes at the
+expense of parameter efficiency, however the runtime is roughly similar.
+
+\subsection{3090 Large Cell}
+While all previous models were designed to be searched for and trained on the available 11 GiB of VRAM of an NVidia 1080TI,
+I also had access to an NVidia 3090 with 24 GiB of VRAM. To utilize this space, I expanded the Type-2 Large Cell
+configuration by increasing the scale and batch size to 96.
+
+\begin{table}[h]
+\begin{center}
+	\begin{tabular}{r|c|c|c|c}
+	 & Test Accuracy & Parameters (M) & Search Hours & Total Runtime (Hours) \\
+	\hline
+	0 	 & 97.07 & 23.36 & 1.66 & 75.59\\
+	\end{tabular}
+\end{center}
+\caption{The performance of the single 3090 large cell CIFAR-10 BonsaiNet model.}
+\label{tab:large_cell_metricsv2}
+\end{table}
+
+While the increased channel size dramatically increased the model's parameters and VRAM requirements, it also brought
+some marginal performance gains as seen in Table~\ref{tab:large_cell_metricsv2}.
+The increased batch size also contributed to the VRAM size, but reduced the search and runtime
+rather significantly of the model.  Only one run was performed of this, simply due to limited access to the hardware.
+
+\subsection{Evaluating the Supernet} \label{sect:supernetevaluation}
+In addition to the 3090 large cell models, a number of supernet experiments models were conducted on an NVidia 3090.
+The 24 GiB of VRAM space allows
+for the 1080Ti type-2 large cell supernet to fit entirely unpruned into memory, meaning the Bonsai process is not actually
+necessary for that configuration on the 3090. Therefore, we can evaluate the efficacy of the BonsaiNet subnets compared
+to both the unpruned supernet as well as a freely pruned supernet, where the former is purely the supernet of all possible
+operations trained without the ability to prune, while the latter is the same supernet that can prune throughout training with
+$\lambda=0$, i.e, pruning purely to benefit accuracy. This results of this comparison tell us a few crucial pieces of information; first,
+how effective is pruning at removing connections from a model in a minimally detrimental way, and second, how effective
+is the Bonsai process' growing and pruning method of building subnets compared to the free pruning of the supernet?
+The results of the three models are reported in Table~\ref{tab:pruning3090}.
+
+\begin{table}[h]
+\begin{center}
+	\begin{minipage}{\linewidth}
+	\begin{tabular}{r|c|c|c|c|c|c}
+	 & Test Acc. & VRAM (GiB) & Acc/GiB & Params. (M) & $c$ & Hours \\
+	\hline
+	No Pruning   & 97.08 & 14.92 & 6.50 & 12.04 & 1.0 & 75.58 \\
+	Free Pruning & \textbf{97.19} & 10.18 & 9.54 & \textbf{6.63} & 0.67 & 60.15 \\
+	BonsaiNet	 & 97.04 & \textbf{7.58 } & \textbf{12.80} & 7.39  & 0.48 & \textbf{41.41}\footnote{This model was trained on a 1080Ti GPU,
+		 while the other two models are trained on a faster 3090. As such, the times cannot be compared exactly. The time shown here is the estimated runtime of this model on the 3090, calculated by comparing
+	 the runtime of a single epoch of this exact model on both cards.}
+	\end{tabular}
+	\end{minipage}
+\end{center}
+\caption{Three type-2 large cell models, with varying methods of determining the final architecture. All three models are
+trained identically, with the only difference being the BonsaiNet model is trained on a 1080Ti, while the other two
+	can only be trained on the much larger 3090.}
+\label{tab:pruning3090}
+\end{table}
+
+These results reveal a few very interesting details. First, and the most surprising, is that not only is the pruned
+supernet significantly smaller and faster than the unpruned supernet, it is actually much better performing as well.
+This is the opposite result to what I had expected; I had assumed that the unpruned supernet would be the best model in the
+space simply due to its size and flexibility. However, even with no compression term in the loss function, i.e, a $\lambda$
+value of 0, the freely pruning model pruned down to a compression level of 67\%. One third of the supernet's
+operational allocation was deemed detrimental by the freely pruning model, which indicates that pruning is not purely
+a space-conserving operation. In my use of pruning, I had considered it a necessary evil to reduce model size, with the
+hope that it was, at best, minimally detrimental. However, this is not the case at all: pruning the supernet significantly
+improves its accuracy. This likely is because the smaller, pruned supernet can train quicker due to having a smaller
+parameter count, and thus can reach higher accuracy within the fixed training epoch count,
+
+Second, while the Bonsai process is less effective than purely pruning the raw supernet, it manages to find an minimally
+detrimental subnet of the raw supernet that is 1.8 times faster to train, 1.97 times smaller, and 1.97 times as performant
+per gibibyte. This latter figure demonstrates BonsaiNet's space efficiency which is likely its strongest attribute;
+BonsaiNet is able to identify a highly efficient subnet of a larger supernet that fits within a target VRAM,
+despite that supernet being much larger than that target VRAM size.

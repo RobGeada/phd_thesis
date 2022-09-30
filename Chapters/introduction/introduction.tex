@@ -1,0 +1,171 @@
+%!TEX root = ../../thesis.tex
+
+\graphicspath{{Chapters/introduction/figures/}}
+
+\chapter{Introduction}
+Neural networks are immensely powerful. They power self-driving cars~\citep{KarpathySite},
+\added{can} outperform doctors at spotting cancer~\citep{walsh2020}, are the best chess players in history~\citep{silver2018}, and
+can write articles indistinguishable from those of human writers~\citep{brown2020}. They can become experts in these tasks without
+requiring their designers to have any expertise themselves; AlphaZero's neural networks are the greatest
+chess players in history yet need only the basic rules of the game as inputs in their path to dominance~\citep{silver2018}.
+Neural networks also excel at finding subtle patterns within massive datasets, ones so nuanced and at such scale as to be imperceptible to human eyes,
+and can use them to discover better ways of solving problems. In theory, all of these talents are out-of-the-box features
+of neural networks, and as such make neural networks massively appealing as solutions to a huge variety of different problem domains.
+
+In practice, however, the performance of these networks are greatly affected by their configurations; that is,
+everything from how they are trained to their internal wiring schemes drastically affect a network's abilities. Tuning these
+configurations is a difficult process on a number of levels. First, and perhaps most challenging, is that neural networks
+are `black boxes', devices whose internal workings are so complex as to be functionally impossible to comprehend in
+any meaningful way. That means the effects of any configuration change are unlikely to be entirely predictable, and thus
+must be experimentally tested. While a general intuition can be built up from years of experience, this
+can often be pretty domain-specific and not particularly generalizable, at least in my own (painful) experience. As such,
+the design directions that should be taken when trying to improve a network are often complete mysteries, and thus design
+is mostly a trial-and-error process.
+
+The second problem, and one that directly compounds the first, is that evaluating the performance of a neural network
+takes a lot of time and compute power, both of which are expensive. For reference, a total of 3,999 individual neural
+networks were evaluated and recorded as part of this work, comprising a grand total of 451 days, 6 minutes, and 23 seconds of graphics
+processing unit (GPU)
+time. Of that, 228 days were taken by just the 100 networks most rigorously evaluated, an average of 55 hours each. Prohibitive
+time costs aside, for those without access to a dedicated GPU this work is either fundamentally
+impossible or at least very expensive: renting an Azure cloud instance of sufficient power
+for the same duration would cost over \pounds20,000~\citep{AzurePricing}. Even with access to a personal GPU it is not particularly cheap,
+considering that the GPU itself can cost over £1,500 and the cumulative energy cost to run it for 451 days would be
+around £1,700, given current average electricity costs~\citep{UKEnergyPrice}. All of this means that the amount of time that
+can be spent playing with different network configurations is limited for the average user.
+
+Finally, the performance that is possible for any particular problem is often an unknown quantity. If a network
+can perform some arbitrary task at 75\% accuracy, is that the best possible performance? Would another configuration score 80\%?
+Without spending a huge amount of time (and therefore money) exploring different candidate networks and configurations,
+this is an unknown quantity, and another factor that makes designing and tuning neural networks very difficult.
+For example, suppose that same example network can perform that arbitrary task at 75\% accuracy, and every change tested so
+far has only been detrimental to performance, is that network already at peak possible performance or were they just
+bad changes?
+
+All of this makes the promised performance and capability of neural networks feel a bit like a siren song; you're lured
+in by tales of their unbelievable, superhuman abilities, but instead drown in years of architecture tuning and
+bills from your cloud provider. Unfortunately, this also means that the amazing power of neural networks is often
+wielded by those with near limitless financial and temporal resources to throw at network design; the four
+examples of incredible networks given in the first paragraph are owned by Tesla, Google, DeepMind, and Microsoft, respectively.
+Indeed, this thesis will explore neural networks and algorithms published by these companies that require
+over 60 \textit{years} of compute time to achieve their results.
+
+In order to democratize the potential of neural networks, to allow the average user to define the state-of-the-art,
+the barrier to entry must be lowered. One way to do this is by eliminating the need for configurational tuning as best as possible,
+by discovering means of automatically designing optimal neural networks. Research towards this goal constitutes the field
+of Neural Architecture Search (NAS), which has seen a lot of success in the last few years: a NAS generated network
+can rival (if not entirely out-compete) the best human designed networks, while only needing a few
+GPU-hours of design time. Despite this success,
+there are a few concerns that constitute the specific focus of this work, the details of which are described in the
+following sections.
+
+\section{Deconstricted Search Spaces: BonsaiNet}
+In general, a NAS algorithm comprises of two parts: a search space and a search algorithm. The former is the set of
+all possible networks that the algorithm can design, while the latter is the means by which the algorithm selects a network
+from that space. A recent concern in the field is that a random search
+algorithm can perform equally well to state-of-the-art algorithms when operating over the same search space; that is,
+a randomly picked network from the search space\footnote{Throughout this thesis and through much of NAS work, random
+search often refers to the concept of replacing every `intelligent' decision made by a NAS algorithm with a random uniform sampling over the available choices.} is often just as good as one that is
+`intelligently' designed by a NAS algorithm. At face value, this appears to indicate that existing NAS algorithms
+are poor, considering that they are extraordinarily expensive means of selecting a network that is apparently no better than one pulled out of a hat.
+
+However, there is a potential explanation for this phenomenon, and that revolves around potential over-restriction of
+the network search spaces. Often, NAS algorithms are evaluated by how well the networks they produce perform over
+a set of standard benchmark tasks. However, there is an extensive body of literature describing how to design excellent
+models for these exact benchmarks. How many of these best-practices have contaminated the search spaces that NAS algorithms
+operate over? If the search space is exclusively full of good networks because of this contamination,
+then regardless of whether a network is selected intelligently or randomly from that set it will be good. Therefore, in such
+a space, a flawless NAS algorithm will be indistinguishable from random search.
+
+The Bonsai search space was designed to explore this idea. The Bonsai search space is drastically larger and less constrained
+than any seen in the literature discussed in this work, while remaining a superset of existing search spaces. Amongst this set
+of less-constrained networks there is greater potential for bad networks to exist, while still preserving all the good networks that were present
+in the original constrained spaces. In terms of network quality, networks in the less-constrained Bonsai search space
+will be of lower average quality than in the constrained space, but with higher variance. This will have the effect of
+lowering the quality of any randomly selected network from the space, creating a bigger difference between average networks
+and good ones. This difference should then make it obvious if a NAS algorithm is truly selecting good networks. Additionally,
+this presents a much more realistic starting emulation of NAS' real world application to novel problems,
+wherein the research required to specifically tailor the search space does not exist.
+
+However, the constrained search spaces of many NAS algorithms are not simply an oversight or accidental bias, but rather a design feature
+to avoid hardware limitations. As such, most existing algorithms in the literature would be unable to operate in the Bonsai search space.
+To examine this BonsaiNet was built, a search algorithm designed from the ground up to operate in the much larger,
+less-constrained search space. \added{BonsaiNet is a supernet-based NAS algorithm that builds models progressively,
+wherein models are broken down into contiguous groups of cells called \textit{sections}. Searching occurs via
+differentiable pruners along its network edges which let the model select any arbitrary mixture of operations as opposed to
+the traditional single-path operational mixture frameworks seen in algorithms like DARTS~\citep{liu2018}. Since searching
+and pruning occur as the same operation, the act of searching for a model section implicitly creates room for subsequent
+sections to be appended to the model. The growing and pruning process repeats until the model is fully grown, at which
+point the model is fully searched. This process allows unique per-cell architectures, which creates
+    significantly greater network heterogeneity as compared to the cellular duplication approach common in NAS literature.
+}. BonsaiNet is then evaluated over a variety
+of different conditions to determine whether the over-constriction hypothesis is correct. This work on the
+Bonsai search space and BonsaiNet was presented as a paper at CVPR-NAS 2020~\citep{geada2020}.
+
+\section{Minimizing Configuration: SpiderNet}
+In the process of experimenting on BonsaiNet, as well as in the general examination of other NAS algorithms,
+a particularly troubling trend became apparent: rather than alleviate the need for manually tuning network designs, BonsaiNet and other NAS algorithms were
+guilty of merely shifting that tuning burden to the configuration of the NAS algorithm itself. While these algorithms excelled
+at producing good networks within a search space, choosing an appropriate search space
+was implicitly a configuration decision that these algorithms could not make. Specifically, those NAS algorithms were capable
+of making micro-level design choices like individual operational choices at certain points in the model, but macro-level
+design choices like overall size, number of internal connections, and complexity of the connectivity were fixed across the
+entire search space. All of those macro-level decisions were still the user's responsibility to design.
+For example, the DARTS~\citep{liu2018} algorithm uses a graph structure to represent its networks,
+and can select which operation should exist along certain edges of the graph. However, it does not determine
+the edge count, node count, or node degree of the graph itself, instead leaving those decisions to the user.
+This is a much smaller responsibility than designing a network entirely from scratch,
+but is still broad enough that exploring every option is entirely unfeasible. How could NAS claim to be a comprehensive
+means of automatically building networks, if the user still needs to design the overarching frameworks that define the shape
+of those networks? As a reductive analogy, NAS algorithms were claiming to be artists, but were instead merely crayoning
+in the coloring books we have designed for them.
+
+To explore these concerns a search algorithm that provided its own
+search space was designed, one that could dynamically expand or constrict the space as it saw fit. This work became SpiderNet, an algorithm
+that uses a variety of heuristics to guide its traversal through an infinite search space. This infinite space is rarely
+seen in literature, as most NAS algorithms instead operate within a finite search space bounded by the macro-level
+design decisions provided by the user. To avoid this configuration, SpiderNet starts from minimal
+initial conditions before it mutates itself into more complicated structures, which minimizes the amount of manual
+tuning of the space required. All that is required is to specify the conditions of the initial trivial seed, which is an implicitly
+smaller set of decisions due to its small size. After designing SpiderNet, a variety of experiments were conducted to evaluate
+various search-guiding heuristics, as well as how these heuristics compare against a randomly-guided search.
+
+\section{Contributions}
+This thesis has produced the following papers and contributions:
+\begin{itemize}[itemsep=-1mm]
+    \item \textbf{BonsaiNet:} A NAS algorithm that successfully operates over a significantly expanded search space and
+    demonstrates NAS' ability to exceed random search in such spaces, published as a workshop paper in CVPR-NAS 2020~\citep{geada2020}. A follow-up paper
+    detailing subsequent results and further analysis is planned upon completion of this thesis.
+    \item \textbf{SpiderNet:} A minimally-configured NAS algorithm that operates over an infinite search space,
+    and demonstrates NAS' ability to outperform random search in a number of different, previously unconsidered metrics. A condensed version of
+    the SpiderNet chapter of this thesis (Chapter~\ref{chapter:spider}) was published as a workshop paper in CVPR-NAS 2022~\citep{geada2022}.
+\end{itemize}
+\vspace{1em}
+Additionally, the following research outcomes were produced. While these are not directly related to the work within this thesis,
+the experience gained from this work is what made them possible.
+\begin{itemize}[itemsep=-1mm]
+    \item \textbf{CVPR-NAS 2021 Unseen Data Competition:} A NAS competition that evaluated how well NAS algorithms perform on entirely unseen datasets and tasks. I led the
+    design, management, and public presentation of the competition. Entries came from 71 teams from around the world, and the competition was
+    eventually won by Samsung Research~\citep{samsung2021}.
+    \item \textbf{CVPR-NAS 2022:} From the success of the 2021 competition, our team was chosen to organize the upcoming 2022 CVPR-NAS workshop. The
+    second annual Unseen Data Competition will be held here, and again I will be writing the evaluation scripts and designing
+    the competition datasets.
+\end{itemize}
+
+\section{Access}
+All code described in this thesis is available at \texttt{\url{https://github.com/RobGeada}}, specifically:
+\begin{itemize}[itemsep=-2mm]
+    \item \textbf{BonsaiNet:} \texttt{https://github.com/RobGeada/bonsai-net}
+    \item \textbf{SpiderNet:} \texttt{https://github.com/RobGeada/spidernet} \\and \texttt{https://github.com/RobGeada/spidernet-NTKLRC}
+\end{itemize}
+
+
+\section{Outline}
+This work will first explore the fundamental background of neural networks in Chapter 2, such as to provide the
+foundation that the rest of the work will stand upon. This will cover their mathematics, the practical
+resources and techniques used to extract performance out of them, the advanced components that go into more specialized network design,
+and the datasets and tasks used to benchmark their abilities. Next, Chapter 3 will explore the existing literature in
+both state-of-the-art network design and Neural Architecture Search, before discussing some missing pieces that warrant
+further examination. These lead to Chapters 4 and 5 which discuss BonsaiNet and SpiderNet respectively, specifically,
+their objectives, design, and evaluatory experiments. Finally, Chapter 6
+summarizes the results and discusses their ramifications for the field as a whole.

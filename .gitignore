@@ -1,0 +1,11 @@
+.DS_Store
+**/*.blg
+**/*.loc
+**/*.lof
+**/*.log
+**/*.lot
+**/*.nlo
+**/*.soc
+**/*.synctex.gz
+**/*.toc
+.idea

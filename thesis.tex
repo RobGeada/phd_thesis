@@ -1,0 +1,46 @@
+\documentclass[a4paper,12pt,times,twoside,print,custommargin,authoryear,PageStyleII]{Classes/PhDThesisPSnPDF}
+%\documentclass[a4paper,12pt,times,numbered,print,index,custommargin]{Classes/PhDThesisPSnPDF}
+\usepackage{listings}
+\input{Preamble/preamble}
+\input{thesis-info}
+
+\begin{document}
+    \pagecolor{white}
+    %\listofchanges[title=List Of Post-Viva Revisions]
+    \frontmatter
+    \maketitle
+
+
+    \include{Chapters/abstract/abstract}
+    \include{Chapters/dedication/dedication}
+    \include{Chapters/declaration/declaration}
+    \include{Chapters/acknowledgements/acknowledgements}
+
+
+
+    \tableofcontents
+    \listoffigures
+    \listoftables
+
+    \mainmatter
+    \input{Chapters/introduction/introduction}
+    \input{Chapters/background/background}
+    \input{Chapters/litreview/litreview}
+    \input{Chapters/bonsai/bonsai}
+    \input{Chapters/spider/spider}
+    \input{Chapters/conclusion/conclusion}
+    % \input{Chapters/appendix_nascomp/appendix_nascomp}
+
+
+    \begin{spacing}{0.9}
+    \bibliography{References/references}
+    \end{spacing}
+
+    \begin{appendices}
+        \input{Chapters/appendix_bonsai/appendix_bonsai}
+        \input{Chapters/appendix_bonsai_configurations/appendix_bonsai_configurations}
+        \input{Chapters/appendix_spider/appendix_spider}
+        \input{Chapters/appendix_nascomp/appendix_nascomp}
+    \end{appendices}
+
+\end{document}

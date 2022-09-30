@@ -1,0 +1,411 @@
+\begin{thebibliography}{}
+
+\bibitem[Abadi et~al., 2016]{abadi2016}
+Abadi, M., Barham, P., Chen, J., Chen, Z., Davis, A., Dean, J., Devin, M.,
+  Ghemawat, S., Irving, G., Isard, M., Kudlur, M., Levenberg, J., Monga, R.,
+  Moore, S., Murray, D.~G., Steiner, B., Tucker, P., Vasudevan, V., Warden, P.,
+  Wicke, M., Yu, Y., and Zheng, X. (2016).
+\newblock Tensorflow: A system for large-scale machine learning.
+\newblock In {\em 12th USENIX Symposium on Operating Systems Design and
+  Implementation (OSDI 16)}, pages 265--283.
+
+\bibitem[Anthony, 2001]{anthony2001}
+Anthony, M. (2001).
+\newblock {\em Discrete Mathematics of Neural Networks}.
+\newblock Society for Industrial and Applied Mathematics.
+
+\bibitem[Brock et~al., 2017]{brock2017}
+Brock, A., Lim, T., Ritchie, J.~M., and Weston, N. (2017).
+\newblock {SMASH:} one-shot model architecture search through hypernetworks.
+\newblock {\em CoRR}, abs/1708.05344.
+
+\bibitem[Brown et~al., 2020]{brown2020}
+Brown, T.~B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P.,
+  Neelakantan, A., Shyam, P., Sastry, G., Askell, A., Agarwal, S.,
+  Herbert{-}Voss, A., Krueger, G., Henighan, T., Child, R., Ramesh, A.,
+  Ziegler, D.~M., Wu, J., Winter, C., Hesse, C., Chen, M., Sigler, E., Litwin,
+  M., Gray, S., Chess, B., Clark, J., Berner, C., McCandlish, S., Radford, A.,
+  Sutskever, I., and Amodei, D. (2020).
+\newblock Language models are few-shot learners.
+\newblock {\em CoRR}, abs/2005.14165.
+
+\bibitem[Cai et~al., 2018]{cai2018}
+Cai, H., Zhu, L., and Han, S. (2018).
+\newblock Proxylessnas: Direct neural architecture search on target task and
+  hardware.
+\newblock {\em CoRR}, abs/1812.00332.
+
+\bibitem[Chen et~al., 2021]{chen2021}
+Chen, W., Gong, X., and Wang, Z. (2021).
+\newblock Neural architecture search on {ImageNet} in four {GPU} hours: {A}
+  theoretically inspired perspective.
+\newblock {\em CoRR}, abs/2102.11535.
+
+\bibitem[Deng et~al., 2009]{deng2009}
+Deng, J., Dong, W., Socher, R., Li, L.-J., Li, K., and Fei-Fei, L. (2009).
+\newblock {ImageNet}: A large-scale hierarchical image database.
+\newblock {\em IEEE Conference on Computer Vision and Pattern Recognition}.
+
+\bibitem[DeVries and Taylor, 2017]{devries2017}
+DeVries, T. and Taylor, G.~W. (2017).
+\newblock Improved regularization of convolutional neural networks with
+  {Cutout}.
+\newblock {\em CoRR}, abs/1708.04552.
+
+\bibitem[Dong and Yang, 2020]{dong2020}
+Dong, X. and Yang, Y. (2020).
+\newblock Nas-bench-201: Extending the scope of reproducible neural
+  architecture search.
+\newblock In {\em International Conference on Learning Representations (ICLR)}.
+
+\bibitem[Dwaraknath, 2019]{dwaraknath2014}
+Dwaraknath, R.~V. (2019).
+\newblock Understanding the neural tangent kernel.
+\newblock \url{https://rajatvd.github.io/NTK/}.
+\newblock Accessed: 2021-07-30.
+
+\bibitem[{European Space Agency}, 2022]{Sentinel}
+{European Space Agency} (2022).
+\newblock Sentinel online.
+\newblock \url{https://sentinel.esa.int/web/sentinel/sentinel-data-access}.
+\newblock Accessed: 2022-08-15.
+
+\bibitem[Geada and McGough, 2022]{geada2022}
+Geada, R. and McGough, A.~S. (2022).
+\newblock {SpiderNet}: Hybrid differentiable-evolutionary architecture search
+  via train-free metrics.
+\newblock {\em CVPR-NAS 2022}.
+
+\bibitem[Geada et~al., 2020]{geada2020}
+Geada, R., Prangle, D., and McGough, A.~S. (2020).
+\newblock {Bonsai-Net}: One-shot neural architecture search via differentiable
+  pruners.
+\newblock {\em CVPR-NAS 2020}.
+
+\bibitem[Glorot et~al., 2011]{glorot2011}
+Glorot, X., Bordes, A., and Bengio, Y. (2011).
+\newblock Deep sparse rectifier neural networks.
+\newblock {\em Proceedings of Machine Learning Research}, 15:315--323.
+
+\bibitem[Goodfellow et~al., 2016]{goodfellow2016}
+Goodfellow, I., Bengio, Y., and Courville, A. (2016).
+\newblock {\em Deep Learning}.
+\newblock MIT Press.
+
+\bibitem[He et~al., 2015]{he2015}
+He, K., Zhang, X., Ren, S., and Sun, J. (2015).
+\newblock Deep residual learning for image recognition.
+\newblock {\em ICLR}.
+
+\bibitem[Huang et~al., 2018]{huang2018}
+Huang, Y., Cheng, Y., Chen, D., Lee, H., Ngiam, J., Le, Q.~V., and Chen, Z.
+  (2018).
+\newblock Gpipe: Efficient training of giant neural networks using pipeline
+  parallelism.
+\newblock {\em CoRR}, abs/1811.06965.
+
+\bibitem[Ioffe and Szegedy, 2015]{ioffe2015}
+Ioffe, S. and Szegedy, C. (2015).
+\newblock Batch normalization: Accelerating deep network training by reducing
+  internal covariate shift.
+\newblock {\em CoRR}, abs/1502.03167.
+
+\bibitem[{Isabella Steward Gardner Museum}, 2022]{ISG}
+{Isabella Steward Gardner Museum} (2022).
+\newblock Isabella steward gardner music collection.
+\newblock \url{https://www.gardnermuseum.org/experience/music}.
+\newblock Accessed: 2022-08-12.
+
+\bibitem[Jacot et~al., 2018]{jacot2018}
+Jacot, A., Gabriel, F., and Hongler, C. (2018).
+\newblock Neural tangent kernel: Convergence and generalization in neural
+  networks.
+\newblock {\em CoRR}, abs/1806.07572.
+
+\bibitem[Karpathy, 2021]{KarpathySite}
+Karpathy, A. (2021).
+\newblock Karpathy.ai.
+\newblock \url{https://karpathy.ai/}.
+\newblock Accessed: 2021-12-29.
+
+\bibitem[Kim et~al., 2019a]{kim2019v1}
+Kim, J., Park, C., Jung, H.-J., and Choe, Y. (2019a).
+\newblock Differentiable pruning method for neural networks.
+\newblock {\em CoRR}, abs/1904.10921.
+
+\bibitem[Kim et~al., 2019b]{kim2019v2}
+Kim, J., Park, C., Jung, H.-J., and Choe, Y. (2019b).
+\newblock Plug-in, trainable gate for streamlining arbitrary neural networks.
+\newblock {\em CoRR}, abs/1904.10921.
+
+\bibitem[Kingma and Ba, 2015]{kingma2015}
+Kingma, D.~P. and Ba, J. (2015).
+\newblock Adam: A method for stochastic optimization.
+\newblock {\em ICLR}.
+
+\bibitem[Krizhevsky, 2009]{kriv2009}
+Krizhevsky, A. (2009).
+\newblock Learning multiple layers of features from tiny images.
+\newblock {\em University of Toronto}.
+
+\bibitem[Krizhevsky et~al., 2012]{kriv2012}
+Krizhevsky, A., Sutskever, I., and Hinton, G.~E. (2012).
+\newblock {ImageNet} classification with deep convolutional neural networks.
+\newblock {\em NIPS}.
+
+\bibitem[Krogh and Hertz, 1992]{krogh1992}
+Krogh, A. and Hertz, J.~A. (1992).
+\newblock A simple weight decay can improve generalization.
+\newblock {\em NIPS}.
+
+\bibitem[{Lambda Labs}, 2018]{lambdaGPUBenchmark}
+{Lambda Labs} (2018).
+\newblock Deep learning gpu benchmarks - v100 vs 2080 ti vs 1080 ti vs titan v.
+\newblock
+  \url{https://lambdalabs.com/blog/best-gpu-tensorflow-2080-ti-vs-v100-vs-titan-v-vs-1080-ti-benchmark/}.
+\newblock Accessed: 2022-08-15.
+
+\bibitem[Larsson et~al., 2016]{larsson2016}
+Larsson, G., Maire, M., and Shakhnarovich, G. (2016).
+\newblock Fractalnet: Ultra-deep neural networks without residuals.
+\newblock {\em CoRR}, abs/1605.07648.
+
+\bibitem[LeCun et~al., 1989]{lecun1989}
+LeCun, Y., Boser, B., Denker, J., Henderson, D., Howard, R., Hubbard, W., and
+  Jackel, L. (1989).
+\newblock Backpropagation applied to handwritten zip code recognition.
+\newblock {\em Neural Computation}, pages 541--551.
+
+\bibitem[LeCun et~al., 1998]{lecun1998}
+LeCun, Y., Bottou, L., Bengio, Y., and Haffner, P. (1998).
+\newblock Gradient-based learning applied to document recognition.
+
+\bibitem[Li and Talwalkar, 2019]{li2019}
+Li, L. and Talwalkar, A. (2019).
+\newblock Random search and reproducibility for neural architecture search.
+\newblock {\em CoRR}, abs/1902.07638.
+
+\bibitem[Lin et~al., 2013]{lin2013}
+Lin, M., Chen, Q., and Yan, S. (2013).
+\newblock {Network In Network}.
+\newblock {\em CoRR}, abs/1312.4400.
+
+\bibitem[Liu et~al., 2017]{liu2017}
+Liu, C., Zoph, B., Shlens, J., Hua, W., Li, L., Fei{-}Fei, L., Yuille, A.~L.,
+  Huang, J., and Murphy, K. (2017).
+\newblock Progressive neural architecture search.
+\newblock {\em CoRR}, abs/1712.00559.
+
+\bibitem[Liu et~al., 2018]{liu2018}
+Liu, H., Simonyan, K., and Yang, Y. (2018).
+\newblock {DARTS:} differentiable architecture search.
+\newblock {\em CoRR}, abs/1806.09055.
+
+\bibitem[Loshchilov and Hutter, 2016]{loshchilov2016}
+Loshchilov, I. and Hutter, F. (2016).
+\newblock {SGDR:} stochastic gradient descent with warm restarts.
+\newblock {\em ICLR}, abs/1806.09055.
+
+\bibitem[Lundberg and Lee, 2017]{lundberg2017}
+Lundberg, S. and Lee, S. (2017).
+\newblock A unified approach to interpreting model predictions.
+\newblock {\em NIPS}, abs/1705.07874.
+
+\bibitem[Luo et~al., 2018]{luo2019}
+Luo, R., Tian, F., Qin, T., Chen, E., and Liu, T.-Y. (2018).
+\newblock Neural architecture optimization.
+\newblock {\em CoRR}, abs/1808.07233.
+
+\bibitem[Maas et~al., 2013]{maas2013}
+Maas, A.~L., Hannun, A.~Y., and Ng, A.~Y. (2013).
+\newblock Rectifier nonlinearities improve neural network acoustic models.
+\newblock In {\em {JMLR} Workshop and Conference Proceedings}, volume~30.
+
+\bibitem[Martello and Toth, 1980]{martello1980}
+Martello, S. and Toth, P. (1980).
+\newblock Optimal and canonical solutions of the change making problem.
+\newblock {\em European Journal of Operation Research}, 4.
+
+\bibitem[{Microsoft Azure}, 2021]{AzurePricing}
+{Microsoft Azure} (2021).
+\newblock Linux virtual machines pricing.
+\newblock
+  \url{https://azure.microsoft.com/en-gb/pricing/details/virtual-machines/linux/}.
+\newblock Accessed: 2021-02-26.
+
+\bibitem[Miller et~al., 1995]{miller1995}
+Miller, B.~L., Miller, B.~L., Goldberg, D.~E., and Goldberg, D.~E. (1995).
+\newblock Genetic algorithms, tournament selection, and the effects of noise.
+\newblock {\em Complex Systems}, 9:193--212.
+
+\bibitem[{NVidia}, 2021]{CUDASite}
+{NVidia} (2021).
+\newblock Cuda zone.
+\newblock \url{https://developer.nvidia.com/cuda-zone}.
+\newblock Accessed: 2021-09-13.
+
+\bibitem[Pascanu et~al., 2013]{pascanu2013}
+Pascanu, R., Montufar, G., and Bengio, Y. (2013).
+\newblock On the number of response regions of deep feed forward networks with
+  piece-wise linear activations.
+\newblock {\em CoRR}, abs/1312.6098.
+
+\bibitem[Paszke et~al., 2019]{paszke2019}
+Paszke, A., Gross, S., Massa, F., Lerer, A., Bradbury, J., Chanan, G., Killeen,
+  T., Lin, Z., Gimelshein, N., Antiga, L., Desmaison, A., K{\"{o}}pf, A., Yang,
+  E.~Z., DeVito, Z., Raison, M., Tejani, A., Chilamkurthy, S., Steiner, B.,
+  Fang, L., Bai, J., and Chintala, S. (2019).
+\newblock Pytorch: An imperative style, high-performance deep learning library.
+\newblock {\em CoRR}, abs/1912.01703.
+
+\bibitem[Pham et~al., 2018]{pham2018}
+Pham, H., Guan, M.~Y., Zoph, B., Le, Q.~V., and Dean, J. (2018).
+\newblock Efficient neural architecture search via parameter sharing.
+\newblock {\em CoRR}, abs/1802.03268.
+
+\bibitem[{PyTorch}, 2021]{TorchSite}
+{PyTorch} (2021).
+\newblock {PyTorch}.
+\newblock \url{https://pytorch.org/}.
+\newblock Accessed: 2021-06-21.
+
+\bibitem[Qian, 1999]{qian1999}
+Qian, N. (1999).
+\newblock On the momentum term in gradient descent learning algorithms.
+\newblock {\em Neural Network Society}.
+
+\bibitem[Real et~al., 2018]{real2018}
+Real, E., Aggarwal, A., Huang, Y., and Le, Q.~V. (2018).
+\newblock Regularized evolution for image classifier architecture search.
+\newblock {\em CoRR}, abs/1802.01548.
+
+\bibitem[Real et~al., 2017]{real2017}
+Real, E., Moore, S., Selle, A., Saxena, S., Suematsu, Y.~L., Le, Q.~V., and
+  Kurakin, A. (2017).
+\newblock Large-scale evolution of image classifiers.
+\newblock {\em CoRR}, abs/1312.4400.
+
+\bibitem[Ren et~al., 2020]{ren2020}
+Ren, P., Xiao, Y., Chang, X., Huang, P., Li, Z., Chen, X., and Wang, X. (2020).
+\newblock A comprehensive survey of neural architecture search: Challenges and
+  solutions.
+\newblock {\em CoRR}, abs/2006.02903.
+
+\bibitem[Russakovsky et~al., 2014]{deng2014}
+Russakovsky, O., Deng, J., Su, H., Krause, J., Satheesh, S., Ma, S., Huang, Z.,
+  Karpathy, A., Khosla, A., Bernstein, M., Berg, A.~C., and Fei-Fei, L. (2014).
+\newblock {ImageNet} large scale visual recognition challenge.
+\newblock {\em CoRR}, abs/1409.0575.
+
+\bibitem[{Samsung R\&D Institute China}, 2021]{samsung2021}
+{Samsung R\&D Institute China} (2021).
+\newblock {SRC-B} won the 1st place in {CVPR-NAS} 2021 {Competition}.
+
+\bibitem[Silver et~al., 2018]{silver2018}
+Silver, D., Hubert, T., Schrittwieser, J., Antonoglou, I., Lai, M., Guez, A.,
+  Lanctot, M., Sifre, L., Kumaran, D., Graepel, T., Lillicrap, T., Simonyan,
+  K., and Hassabis, D. (2018).
+\newblock A general reinforcement learning algorithm that masters chess, shogi
+  and go through self-play.
+\newblock {\em Science}.
+
+\bibitem[Simonyan and Zisserman, 2015]{simon2014}
+Simonyan, K. and Zisserman, A. (2015).
+\newblock Very deep convolution networks for large-scale image recognition.
+\newblock {\em ICLR}.
+
+\bibitem[Smith and Le, 2017]{smith2017}
+Smith, S.~L. and Le, Q.~V. (2017).
+\newblock A {Bayesian} perspective on generalization and stochastic gradient
+  descent.
+\newblock {\em CoRR}, abs/1710.06451.
+
+\bibitem[Srivastava et~al., 2014]{srivastava2014}
+Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I., and Salakhutdinov,
+  R. (2014).
+\newblock Dropout: A simple way to prevent neural networks from overfitting.
+\newblock {\em JMLR}.
+
+\bibitem[Stinchcombe and White, 1989]{stinchcombe1989}
+Stinchcombe, M. and White, H. (1989).
+\newblock Multilayer feedforward networks are universal approximators.
+\newblock {\em Neural Networks}.
+
+\bibitem[Sumbul et~al., 2019]{sumbul2019}
+Sumbul, G., Charfuelan, M., Demir, B., and Markl, V. (2019).
+\newblock Bigearthnet: A large-scale benchmark archive for remote sensing image
+  understanding.
+
+\bibitem[Szegedy et~al., 2014]{szegedy2014}
+Szegedy, C., Liu, W., Jia, Y., Sermanet, P., Reed, S.~E., Anguelov, D., Erhan,
+  D., Vanhoucke, V., and Rabinovich, A. (2014).
+\newblock Going deeper with convolutions.
+\newblock {\em CoRR}.
+
+\bibitem[Tan and Le, 2019]{tan2019}
+Tan, M. and Le, Q.~V. (2019).
+\newblock Efficientnet: Rethinking model scaling for convolutional neural
+  networks.
+\newblock {\em CoRR}, abs/1905.11946.
+
+\bibitem[Torralba et~al., 2008]{torralba2008}
+Torralba, A., Fergus, R., and Freeman, W.~T. (2008).
+\newblock 80 million tiny images: a large dataset for non-parametric object and
+  scene recognition.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence}.
+
+\bibitem[{UK Department for Business, Energy, and Industrial Strategy},
+  2021]{UKEnergyPrice}
+{UK Department for Business, Energy, and Industrial Strategy} (2021).
+\newblock Quarterly energy prices, {December} 2021.
+\newblock
+  \url{https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1043434/Quarterly_Energy_Prices_December_2021.pdf}.
+\newblock Accessed: 2021-12-30.
+
+\bibitem[Walsh, 2020]{walsh2020}
+Walsh, F. (2020).
+\newblock {AI} outperforms doctors diagnosing breast cancer.
+\newblock {\em BBC News}.
+
+\bibitem[Wright, 1975]{wright1975}
+Wright, J. (1975).
+\newblock The change-making problem.
+\newblock {\em ACM}, 22.
+
+\bibitem[Xiao et~al., 2017]{xiao2017}
+Xiao, H., Rasul, K., and Vollgraf, R. (2017).
+\newblock Fashion-mnist: a novel image dataset for benchmarking machine
+  learning algorithms.
+
+\bibitem[Xie et~al., 2020]{xi2019}
+Xie, S., Kirillov, A., Girshick, R., and He, K. (2020).
+\newblock Exploring randomly wired neural networks for image recognition.
+\newblock {\em CoRR}, abs/1904.01569.
+
+\bibitem[Xu et~al., 2020]{xu2020}
+Xu, Y., Xie, L., Zhang, X., Chen, X., Qi, G.-J., and amd Hongkai~Xiong, Q.~T.
+  (2020).
+\newblock {PC-DARTS:} partial channel connections for memory-efficient
+  architecture search.
+\newblock {\em CoRR}, abs/1907.05737.
+
+\bibitem[Ye, 2018]{ye2018}
+Ye, T. (2018).
+\newblock Visual object detection from lifelogs using visual non-lifelog data.
+
+\bibitem[Yu et~al., 2019]{yu2019}
+Yu, K., Sciuto, C., Jaggi, M., Musat, C., and Salzman, M. (2019).
+\newblock Evaluating the search phase of neural architecture search.
+\newblock {\em CoRR}, abs/1902.08142.
+
+\bibitem[Zoph and Le, 2017]{zoph2017}
+Zoph, B. and Le, Q.~V. (2017).
+\newblock Neural architecture search with reinforcement learning.
+\newblock {\em arXiv preprint arXiv:1611.01578}.
+
+\bibitem[Zoph et~al., 2017]{zoph_sir2017}
+Zoph, B., Vasudevan, V., Shlens, J., and Le, Q.~V. (2017).
+\newblock Learning transferable architectures for scalable image recognition.
+\newblock {\em CoRR}, abs/1707.07012.
+
+\end{thebibliography}

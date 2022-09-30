@@ -1,0 +1,23 @@
+\begin{abstract}
+Neural networks are incredibly powerful tools for a variety of different situations. However, their development can
+    be difficult, time-consuming, and expensive. To address this, the field of Neural Architecture Search (NAS) seeks
+    to provide automated algorithms to produce optimal network designs. However, recent criticism has been levied towards
+    these algorithms regarding their performance compared to a purely random search strategy. Additionally, these algorithms
+    themselves require a significant amount of configuration, limiting their ability to ease the costs of network design.
+To examine these criticisms BonsaiNet is presented, a NAS algorithm that operates over a significantly
+    broadened search space that is a superset to those used by other leading NAS algorithms. This broadened search space lowers the
+    average quality of random networks in the space, while preserving high-quality networks to be potentially discovered by
+NAS. Indeed, BonsaiNet still produces networks competitive with the state-of-the-art, indicating that random
+    search is only competitive with NAS in over-constrained search spaces. Furthermore, BonsaiNet employs a \textit{large-cell}
+design pattern which eliminates the need to specify the count or types of each individual cell in the model,
+thus significantly reducing the necessary configuration.
+To further examine the random search and configuration concerns, SpiderNet is presented, a NAS algorithm that dynamically evolves from a minimal
+initial state within an infinitely large search space. This transfers the burden of determining network size and macro-level connectivity
+patterns of the networks from the user to the algorithm, drastically reducing the amount of configuration necessary
+    to provide good results. Indeed, despite the infinite search space and minimal configuration, SpiderNet produces
+highly competitive models. Furthermore, it consistently produces more time and parameter efficient models than random
+search, indicating two new dimensions by which NAS can have an advantage over random search.
+As such, BonsaiNet and SpiderNet demonstrate that random search's comparable ability to NAS is an
+illusion produced by both an over-constrained search space and a disregard for time and parameter efficiencies. Additionally,
+both algorithms provide a strong proof-of-concept towards a minimal-configuration NAS algorithm.
+\end{abstract}
